@@ -1,0 +1,166 @@
+\chapter{Chapitre I : Généralités sur la virtualisation et le cloud computing}
+
+\section{Introduction}
+L’informatique moderne évolue autour de technologies qui rendent les systèmes plus flexibles, performants et faciles à administrer. Parmi elles, la virtualisation et le cloud computing jouent un rôle essentiel. La virtualisation permet de faire fonctionner plusieurs environnements sur une même machine physique, optimisant ainsi l’utilisation des ressources et facilitant la gestion des infrastructures.
+Sur cette base s’est développé le cloud computing, qui offre l’accès à des ressources et services informatiques à distance, selon les besoins réels des utilisateurs. Sans la virtualisation, ce modèle ne pourrait pas exister.
+Ce chapitre présente d’abord les principes de la virtualisation, puis les fondements du cloud computing, ses services, ses modèles de déploiement et les principaux fournisseurs. Ensemble, ces notions permettent de comprendre les infrastructures numériques actuelles et leur importance dans les systèmes d’information.
+
+\section{La virtualisation}
+\subsection{Définition}
+La \textbf{virtualisation} est une technologie qui permet de créer plusieurs environnements simulés ou ressources spécialisées à partir d'un seul système physique. Son logiciel, appelé \textbf{hyperviseur}, est directement relié au matériel et permet de diviser ce système unique en plusieurs environnements sécurisés distincts. C'est ce que l'on appelle les \textbf{machines virtuelles}. Ces dernières exploitent la capacité de l'hyperviseur à séparer les ressources du matériel et à les distribuer de manière appropriée. \\
+Dans \textbf{un environnement virtualisé}, on distingue deux types de machines :
+\begin{itemize}[label=\textbullet]
+    \item \textbf{Machine hôte (Host) :} c’est la machine physique qui exécute l’hyperviseur. Elle fournit les ressources matérielles processeur, mémoire, stockage, réseau  nécessaires au fonctionnement des différentes machines virtuelles. Le serveur hôte constitue donc la plateforme matérielle centrale sur laquelle repose l’ensemble de l’infrastructure virtualisée.
+    \item \textbf{Machine invitée (Guest) :} il s’agit de la machine virtuelle créée par l’hyperviseur. Chaque machine invitée possède son propre système d’exploitation, ses applications et ses paramètres, comme un ordinateur indépendant. Bien qu’elle partage les ressources matérielles du serveur hôte, elle fonctionne dans un environnement isolé et contrôlé. 
+    \\
+\end{itemize}
+
+\textbf{Spécificités des machines virtuelles : } 
+\begin{enumerate}
+     \item \textbf{L’isolation : } Les machines virtuelles s’exécutent de manière indépendante et sont protégées les unes des autres, ce qui signifie qu’une panne, un crash ou une attaque dans l’une d’elles n’affecte pas les autres, que chaque VM conserve ses propres configurations et systèmes d’exploitation, et que l’hyperviseur contrôle strictement l’accès aux ressources pour éviter tout conflit.
+     \item \textbf{L’encapsulation :} Chaque machine virtuelle est contenue dans un ensemble de fichiers comprenant la configuration, le disque virtuel et les instantanés. Cette encapsulation permet de sauvegarder, copier, déplacer ou restaurer facilement une VM, ce qui simplifie sa gestion et augmente sa portabilité, une machine virtuelle peut être déplacée d’un serveur à un autre presque aussi facilement que des données, sans réinstaller ni reconfigurer le système. 
+    \item \textbf{L’indépendance matérielle :} Les machines virtuelles ne dépendent pas directement du matériel physique. L’hyperviseur fournit un matériel virtuel standardisé (CPU, mémoire, stockage, réseau), ce qui permet de faire fonctionner une VM sur différents serveurs sans modification, d’assurer la migration, la scalabilité et la continuité des services.\\
+\end{enumerate}
+
+
+\begin{figure}[h] 
+    \centering
+    \includegraphics[width=0.9\textwidth]{chapitre1_images/comparaison.jpg} 
+    \caption{Comparaison entre une architecture informatique traditionnelle et une architecture virtualisée}
+    \label{fig:comparaison}
+\end{figure}
+
+\vspace{2cm}
+\subsection{Historique}
+L’origine de la virtualisation remonte aux années \textbf{1960}, lorsque IBM développe des systèmes capables de partager la puissance de calcul d’un mainframe entre plusieurs utilisateurs. À cette époque, la virtualisation sert principalement à optimiser l'utilisation de machines extrêmement coûteuses et à permettre l’exécution simultanée de plusieurs environnements isolés. \\
+Dans les \textbf{années 1970 et 1980}, le concept reste limité aux grands systèmes IBM, mais pose les bases des techniques modernes de machines virtuelles. Avec l’apparition des ordinateurs personnels dans les années 1980, le besoin de virtualisation diminue temporairement, car les ressources deviennent moins coûteuses. \\
+Dans les \textbf{années 1990}, l'augmentation des capacités des processeurs et la diversification des systèmes d’exploitation redonnent un intérêt à la virtualisation. C’est à cette période que des acteurs comme \textbf{VMware} introduisent les premiers hyperviseurs modernisés, permettant d’exécuter plusieurs systèmes sur un seul poste ou serveur.\\
+Les \textbf{années 2000} marquent une véritable adoption en entreprise. Les serveurs physiques étant sous-utilisés, la virtualisation devient une solution idéale pour réduire les coûts, optimiser les ressources, renforcer l’isolation et simplifier l’administration.
+À partir des \textbf{années 2010}, la virtualisation devient un pilier majeur du \textbf{cloud computing}. Les environnements virtualisés s’intègrent à grande échelle dans les datacenters, permettant la création de clouds privés, publics et hybrides, et ouvrant la voie à la virtualisation du réseau (NFV), du stockage (SDS) et des applications (containers).\\
+Aujourd’hui, la virtualisation est devenue une technologie essentielle de l’informatique moderne, au cœur de la plupart des infrastructures cloud et des environnements d’entreprise.
+
+\subsection{Techniques de virtualisation}
+Les principaux types de virtualisation sont présentés ci-dessous : 
+\begin{itemize}[label=\textbullet]
+    \item \textbf{Virtualisation complète (Full Virtualization)} : 
+    Dans la virtualisation complète, l’hyperviseur émule entièrement le matériel physique. Les systèmes invités ne savent pas qu’ils sont virtualisés et fonctionnent sans modification. Cette technique est très flexible, mais peut générer une surcharge de performance due à l’émulation. 
+    \textbf{Exemples : VMware ESXi, VirtualBox, KVM (mode full).}
+
+    \item \textbf{Paravirtualisation} : 
+    La paravirtualisation est une technique dans laquelle le système d’exploitation invité est modifié pour être conscient de la virtualisation. Il communique directement avec l’hyperviseur, ce qui réduit la surcharge liée à l’émulation complète du matériel et améliore les performances.  \\
+    \textbf{Exemple : Xen (mode para-virtualisé).}
+
+    \item \textbf{Virtualisation matérielle} : 
+    La virtualisation matérielle utilise les extensions du processeur (Intel VT-x/VT-d, AMD-V) pour permettre à l’hyperviseur de gérer directement les ressources matérielles et exécuter plusieurs machines virtuelles. Cela réduit la surcharge par rapport à une émulation logicielle, améliore les performances et permet aux systèmes invités de fonctionner sans modification. Elle nécessite un processeur compatible et l’activation de l’option correspondante dans le BIOS ou l’UEFI.\\
+    \textbf{Exemple : Hyper-V, VMware avec extensions matérielles.}
+\end{itemize}
+
+\subsection{Les hyperviseurs}
+\subsubsection{Définition}
+Un hyperviseur est un logiciel qui permet de créer et gérer des machines virtuelles (VM) sur un serveur physique. Il sert d’intermédiaire entre le matériel physique et les systèmes d’exploitation invités, en allouant les ressources CPU, mémoire, stockage et réseau à chaque VM de manière sécurisée et isolée.
+\subsubsection{Types d'hyperviseurs}
+\begin{itemize}[label=\textbullet]
+    \item \textbf{Hyperviseur de type 1 (bare-metal)} :  
+    Par convention, lorsqu’on évoque le terme « hyperviseur », on fait souvent référence à ce type. L’hyperviseur de type 1 s’installe directement sur le matériel physique du serveur, sans passer par un système d’exploitation hôte. Dès le démarrage de la machine, il prend immédiatement le contrôle des ressources matérielles.
+
+    \textbf{Avantages :}
+   Toutes les ressources du serveur peuvent être directement attribuées aux machines virtuelles, ce qui optimise les performances et la réactivité.
+
+    \textbf{Inconvénients :}
+Il n’est possible d’exécuter qu’un seul hyperviseur sur un serveur physique à la fois. Toutefois, cela n’est généralement pas un problème, car un seul hyperviseur suffit à gérer l’ensemble des applications et services nécessaires dans la majorité des entreprises.
+
+    \item \textbf{Hyperviseur de type 2 (hébergé)} :  
+    L’hyperviseur de type 2 ne s’installe pas directement sur le matériel, mais au-dessus d’un système d’exploitation hôte (Windows, Linux, macOS). Le système d’exploitation gère d’abord le matériel, puis l’hyperviseur fonctionne comme une application classique permettant de créer et d’exécuter des machines virtuelles.
+
+    \textbf{Avantages :}
+    Comme il s’appuie sur un système d’exploitation déjà installé, ce type d’hyperviseur peut coexister avec d’autres applications, et il est même possible d’en utiliser plusieurs simultanément sur la même machine.
+
+
+    \textbf{Inconvénients :}
+    Étant donné qu’il fonctionne au-dessus d’un système d’exploitation hôte qui consomme lui aussi des ressources, l’hyperviseur de type 2 ne peut pas offrir le même niveau de performances ni la même disponibilité matérielle qu’un hyperviseur de type 1.
+
+\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{chapitre1_images/type_hyperviseur.jpg}
+    \caption{Différence entre un hyperviseur de type 1 (bare-metal) et un hyperviseur de type 2 (hébergé)}
+    \label{fig:hyperviseurs}
+\end{figure}
+\section{Le cloud computing}
+\subsection{Définition}
+Le \textbf{cloud computing} (informatique en nuage) désigne un modèle d’accès à des ressources informatiques partagées telles que des serveurs physiques ou virtuels, stockage, des réseaux, des logiciels ou des plateformes, via Internet ou un réseau distant. Plutôt que d’acheter et de maintenir leurs propres serveurs, les utilisateurs ou les organisations consomment ces ressources selon leurs besoins, avec une facturation à l’usage ou sous forme d’abonnement.
+\subsection{Historique}
+Le concept de cloud computing remonte aux \textbf{années 1960} avec les premiers systèmes de \emph{partage de temps (time-sharing)}, où plusieurs utilisateurs pouvaient partager un même ordinateur central pour exécuter leurs programmes simultanément. Cette approche visait à optimiser l’utilisation des ressources coûteuses des mainframes.
+\\
+ 
+Dans les \textbf{années 1990}, l’émergence d’Internet et des réseaux à haut débit a permis le développement de services accessibles à distance.
+
+Au début des \textbf{années 2000}, Amazon lance \textbf{AWS}, suivi par \textbf{Google Cloud} et \textbf{Microsoft Azure}, rendant possibles la location de serveurs virtuels et le stockage à la demande.
+
+Aujourd’hui, le cloud est devenu un \textbf{élément central de l’informatique moderne}, offrant des ressources flexibles, évolutives et accessibles à tout moment sans investissement matériel direct. 
+
+\newpage
+\subsection{Les modèles de services ( Iaas, PaaS, SaaS) }
+Les services de cloud computing sont généralement classés en trois grandes catégories, selon ce qu’ils offrent au consommateur :
+\subsubsection{IaaS (Infrastructure as a Service) :}
+IaaS regroupe les services de cloud computing destinés aux consommateurs qui ont besoin de ressources informatiques fondamentales. Cela inclut : 
+\renewcommand{\labelitemi}{\textbf{--}}
+\begin{itemize}
+\item  La capacité de traitement (CPU, mémoire),
+\item Le stockage (disques, bases de données),
+\item Le réseau (connexion, bande passante, pare-feu),
+\item Et d’autres ressources essentielles pour déployer et gérer leurs propres systèmes et applications.
+\end{itemize}
+Avec IaaS, l’utilisateur peut créer et configurer ses machines virtuelles, installer des systèmes d’exploitation et gérer ses applications tout en conservant un contrôle quasi total sur l’environnement, sans avoir à investir dans le matériel physique.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{chapitre1_images/iaas.jpg}
+    \caption{Répartition des responsabilités entre le fournisseur
+ et le consommateur dans le modèle IaaS}
+\end{figure}
+\subsubsection{PaaS (Platform as a Service) :}
+PaaS fournit aux consommateurs une plateforme complète permettant de développer, tester et déployer des applications sans avoir à gérer l’infrastructure sous-jacente. Cette plateforme inclut le système d’exploitation, les frameworks de développement, les bases de données, ainsi que les outils nécessaires à la création et à l’exécution des applications. Le fournisseur prend en charge la gestion du matériel, de la virtualisation, du stockage et du réseau, tandis que le consommateur est responsable uniquement de ses applications 
+et de leurs données.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{chapitre1_images/paas.jpg}
+    \caption{Répartition des responsabilités entre le fournisseur
+ et le consommateur dans le modèle PaaS}
+\end{figure}
+
+\subsubsection{SaaS (Software as a Service) :}
+SaaS fournit aux consommateurs des applications complètes, hébergées et maintenues par le fournisseur, accessibles directement via Internet. L’utilisateur n’a pas à gérer l’infrastructure, le système d’exploitation, les logiciels ou la virtualisation : il se contente d’utiliser le service et de gérer ses propres données et paramètres applicatifs. Ce modèle permet un accès immédiat à des logiciels prêts à l’emploi, tout en déléguant la maintenance, les mises à jour et la sécurité au fournisseur.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{chapitre1_images/saas.jpg}
+    \caption{Répartition des responsabilités entre le fournisseur
+ et le consommateur dans le modèle SaaS}
+\end{figure}
+
+
+%%% Les modèles de déploiement %%
+\subsection{Les modèles de déploiement : }
+Les clouds peuvent être classés en fonction du \textbf{type de client ou de l’organisation à laquelle le service est fourni}. On distingue principalement quatre modèles :
+
+\begin{itemize}
+\renewcommand{\labelitemi}{$\bullet$} 
+    \item  \textbf{Cloud public :}  Un cloud public est un modèle dans lequel le fournisseur de services cloud installe et gère l’infrastructure, la plateforme et les logiciels, tout en rendant ces services accessibles à un large public, comprenant des entreprises, des clients ou des utilisateurs finaux.
+    \item \textbf{Cloud privé :} Un cloud privé est un modèle dans lequel l’infrastructure et les services cloud sont dédiés à une seule organisation. Les ressources sont isolées des autres utilisateurs, offrant un contrôle accru sur la sécurité, la gestion et les coûts, tout en permettant à l’entreprise de consommer des services cloud de manière flexible et adaptée à ses besoins.
+    \item \textbf{Cloud communautaire :} Un cloud communautaire est partagé par plusieurs organisations ayant des intérêts ou des besoins communs, tels que la sécurité, la conformité ou le secteur d’activité. Ce modèle permet de mutualiser les ressources tout en maintenant un certain niveau de contrôle spécifique à chaque organisation.
+    \item \textbf{Cloud hybride :} Un cloud hybride combine deux ou plusieurs types de clouds (public, privé ou communautaire) interconnectés, permettant le déplacement des données et des applications selon les besoins. Il offre flexibilité, optimisation des ressources et possibilité de concilier sécurité et évolutivité.
+\end{itemize}
+
+
+%% Présentation de quelques fournisseurs de services Cloud 
+\subsection{Présentation de quelques fournisseurs de services Cloud  : }
+Les principaux fournisseurs de services cloud au niveau mondial sont Amazon Web Services (AWS), Microsoft Azure et Google Cloud Platform (GCP). Ces plateformes dominent le marché du cloud computing grâce à la diversité de leurs services, leur capacité d’innovation et l’étendue de leurs infrastructures distribuées dans des centres de données à travers le monde
+\begin{itemize}
+\renewcommand{\labelitemi}{$\bullet$} 
+\item \textbf{AWS :} AWS est le leader du marché du cloud. Il propose une très large gamme de services couvrant le calcul, le stockage, les bases de données, le réseau, la cybersécurité, l’IA, l’IoT ou encore les outils DevOps. Sa maturité et son écosystème riche lui permettent de répondre aussi bien aux besoins des petites entreprises qu’à ceux des grandes organisations. AWS est reconnu pour sa grande stabilité, son innovation rapide et la disponibilité de services très spécialisés.
+\item \textbf{Azure :} Azure occupe la deuxième place mondiale et s’intègre particulièrement bien avec les solutions Microsoft déjà présentes dans les entreprises (Windows Server, Active Directory, SQL Server, etc.). Cette forte compatibilité facilite la migration vers le cloud. Azure propose également des services variés : machines virtuelles, bases de données, stockage, outils IA, solutions DevOps et plateformes applicatives. Sa présence dans le secteur professionnel et gouvernemental en fait une plateforme très utilisée.
+ \item \textbf{GCP :} GCP se démarque par sa puissance dans les domaines du Big Data, de l’analyse de données, du machine learning et de l’intelligence artificielle. Des services comme BigQuery ou TensorFlow ont renforcé sa réputation dans le traitement massif de données. GCP offre également des services classiques d’infrastructure (VM, stockage, réseau) ainsi que des solutions avancées pour les conteneurs, notamment grâce au rôle majeur de Google dans le développement de Kubernetes.
+\end{itemize}
+
+\section{Conclusion}
+La virtualisation et le cloud computing sont des technologies essentielles qui transforment la manière dont les ressources informatiques sont utilisées et gérées. La virtualisation optimise les ressources matérielles, tandis que le cloud computing permet un accès flexible et modulable aux services. Ce chapitre a posé les bases théoriques nécessaires pour comprendre ces concepts et leur rôle central dans les infrastructures modernes.

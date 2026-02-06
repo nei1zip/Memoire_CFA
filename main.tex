@@ -1,0 +1,104 @@
+\documentclass[12pt,a4paper]{report}
+
+% ====== Préambule ======
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[labelfont=bf,textfont=bf,justification=centering]{caption}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage[french]{babel} 
+\usepackage{xcolor,graphicx}
+\usepackage[top=0.6in,bottom=0.6in,right=1in,left=1in]{geometry}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+
+% ==== Logos à gauche et droite avec texte centré ====
+\noindent
+\makebox[\textwidth]{%
+    \includegraphics[height=1.5cm]{logo/logo.png} % Logo gauche
+    \hfill
+    \begin{minipage}{0.95\textwidth}
+        \centering
+        \textbf{REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE}\\
+        \textbf{MINISTERE DE LA FORMATION ET DE L’ENSEIGNEMENT PROFESSIONNELS}\\
+        \textbf{INSTITUT NATIONAL SPECIALISE DE LA FORMATION PROFESSIONNELLE IMERZOUKEN MED AREZKI}\\
+        \textbf{TIZI OUZOU}
+    \end{minipage}
+    \hfill
+    \includegraphics[height=1.5cm]{logo/logo.png} % Logo droite
+}
+\vspace{4cm}
+
+
+
+
+% ==== Type de mémoire ====
+{\large \bfseries Mémoire de Fin de Formation Professionnelle}\\[0.3cm]
+{\large En vue de l'obtention du diplôme de Technicien Supérieur}\\[1cm]
+{\large \bfseries Spécialité }\\[0.5cm]
+{\large Administration et Sécurité des Réseaux Informatiques}\\[1cm]
+
+{\LARGE \bfseries Thème }\\[0.1cm]
+
+% ==== Titre du mémoire dans un cadre ====
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{blue} Implémentation d’un cloud privé sous VMware vSphere \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[2.5cm]
+
+
+% ==== Auteurs / Promoteur / Encadrant ====
+\noindent
+\begin{minipage}{0.45\textwidth}
+  \begin{flushleft}
+    {\Large \textbf{Réalisé par :}}\\[0.3cm]
+    {\large \textsc{ABDELHALKI Naila}}\\
+    {\large \textsc{HOUFEL Yanis}}\\
+    {\large \textsc{MOHAMMEDI Ania}}
+  \end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+  \begin{flushright}
+    {\Large \textbf{Promoteur :}}\\[0.2cm]
+    {\large M. MOHAMMEDI}\\[0.6cm]
+
+    {\Large \textbf{Encadré par :}}\\[0.2cm]
+    {\large M. HADOUS}
+  \end{flushright}
+\end{minipage}
+
+\vspace{2cm}
+
+
+
+
+\vfill
+
+% ==== Année universitaire en bas ====
+{\textbf{\large Année universitaire 2025-2026}}
+
+\end{center}
+\end{titlepage}
+
+
+
+
+
+% ====== Inclusion des chapitres ======
+\include{tablefigures}
+\include{introduction}
+\include{chapitre1}
+\include{chapitre2}
+
+\appendix
+\include{chapitres/annexes}
+
+\end{document}
