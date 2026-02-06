@@ -1,0 +1,6 @@
+\babel@toc {french}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Comparaison entre une architecture informatique traditionnelle et une architecture virtualisée}}{3}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Différence entre un hyperviseur de type 1 (bare-metal) et un hyperviseur de type 2 (hébergé)}}{5}{figure.caption.6}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Répartition des responsabilités entre le fournisseur et le consommateur dans le modèle IaaS}}{7}{figure.caption.8}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Répartition des responsabilités entre le fournisseur et le consommateur dans le modèle PaaS}}{8}{figure.caption.10}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Répartition des responsabilités entre le fournisseur et le consommateur dans le modèle SaaS}}{8}{figure.caption.12}%
